@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', async function(event) {
         text: todoText
       })
 
+      // Step 3: Add code to Step 1 to add todo to Firestore
       let todoId = docRef.id
       console.log(`new todo with ID ${todoId} created`)
 
@@ -49,13 +50,21 @@ document.addEventListener('DOMContentLoaded', async function(event) {
       </div>
     `)
 
+    // Step 4: Add code to allow completing todos
+
+    // the [space].done below means that we are looking for something with the class of done inside of something with the class of todo-${todoId}
     document.querySelector(`.todo-${todoId} .done`).addEventListener('click', async function(event) {
+      // alternate method to code this same idea
+      // let todoLink = document.querySelector(`.todo-${todoId} .done`)
+      // todoLink.addEventListener('click', function(event){
+      // same code as below
+      // })
       event.preventDefault()
       document.querySelector(`.todo-${todoId}`).classList.add('opacity-20')
       await db.collection('todos').doc(todoId).delete()
     })
   }
 
-  // Step 3: Add code to Step 1 to add todo to Firestore
-  // Step 4: Add code to allow completing todos
+  
+  
 })
